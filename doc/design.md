@@ -16,8 +16,14 @@ HepMC chooses to describe the relations by saving with each vertex all indices o
 
 In the FCC-EDM we made the choice to only save the particle-to-vertex relation persistently. The vertex-to-particle relation on the other hand is dropped and needs to be re-created at run-time. For this we provide tools that [create and traverse a directed acyclic graph](https://github.com/HEP-FCC/fcc-edm/tree/master/utilities/ParticleGraph.h).
 
-The `MCParticle` is composed of information about start and end vertex, as well as a `BareParticle`. The `BareParticle` is a POD and holds the kinematic information and properties of the particle. This composition was chosen to ease the development of code that runs both on reconstructed and generated particles (by writing algorithms that use a `BareParticle`).
+The `MCParticle` is composed of information about start and end vertex, as well as a `BareParticle`. The `BareParticle` is a POD and holds the kinematic information and properties of the particle. This composition was chosen to ease the development of code that runs both on reconstructed and generated particles (by writing algorithms that use a `BareParticle`). Also see the [usage document](./usage.md).
 
 Simulated event description
 --
+The physics output of simulation are hits, describing the position and deposited energy of a particle traversal through a sensitive detector component. We have dedicated classes for Tracker and Calorimeter hits:
+- [fcc::SimCaloHit](https://github.com/HEP-FCC/fcc-edm/blob/master/datamodel/datamodel/SimCaloHit.h)
+- [fcc::SimTrackHit](https://github.com/HEP-FCC/fcc-edm/blob/master/datamodel/datamodel/SimTrackHit.h)
 
+
+Reconstructed event description
+---
