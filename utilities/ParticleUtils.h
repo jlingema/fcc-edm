@@ -17,6 +17,7 @@ class LorentzVector;
 namespace utils {
   // Seeing as this may not be correct for particles outside of collections,
   // we decided to implement this as non-member function for now...
+  /// Check if two particles are the same.
   bool compareParticles(const fcc::Particle& lhs, const fcc::Particle& rhs);
 
   /// returns the ParticleHandles that are in p1s but not in p2s.
