@@ -18,12 +18,17 @@ In the FCC-EDM we made the choice to only save the particle-to-vertex relation p
 
 The `MCParticle` is composed of information about start and end vertex, as well as a `BareParticle`. The `BareParticle` is a POD and holds the kinematic information and properties of the particle. This composition was chosen to ease the development of code that runs both on reconstructed and generated particles (by writing algorithms that use a `BareParticle`). Also see the [usage document](./usage.md).
 
-Simulated event description
+Simulated and reconstructed event description
 --
+
 The physics output of simulation are hits, describing the position and deposited energy of a particle traversal through a sensitive detector component. We have dedicated classes for Tracker and Calorimeter hits:
 - [fcc::SimCaloHit](https://github.com/HEP-FCC/fcc-edm/blob/master/datamodel/datamodel/SimCaloHit.h)
 - [fcc::SimTrackHit](https://github.com/HEP-FCC/fcc-edm/blob/master/datamodel/datamodel/SimTrackHit.h)
 
+Again, a composition of `BareHit` is chosen to allow algorithms to work on both simulated and real detector hits without the need of templates.
 
-Reconstructed event description
----
+Reconstruction is then performed with these hits as input. Following clusterisation, track fits are performed on track clusters, vertices are found based on the tracks and particles are identified based on calorimeter clusters and track parameters. Finally close-by particles are added to particle jets.
+
+The hierarchy of these physics objects is persistently saved through `OneToManyRelations`. E.g. a cluster knows which hits it contains, similarly a jet knows which particles are associated with it.
+
+After this reconstruction further algorithms may be run to further classify physics objects (e.g. b-tagging algorithms on jets). `OneToOneRelations` are used to associate the results of such algorithms with the physics object.
