@@ -36,8 +36,14 @@ setKinematics(particle.Core, 20, 0.1, 0.5);
 setKinematics(mcParticle.Core, 20, 0.1, 0.5);
 ~~~
 
+Processing composed objects
+--
+In [the design doc](./design.md) we describe why we chose to encode some objects through composition. E.g. Tags and Jets are saved as tag information and `OneToOneRelation` to the jet. We advise to directly iterate over those composed objects instead of iterating over the jet collection and then searching for the tag in the tag collection.
+
 Utilities
 --
 We provide a number of uitility functions that may be commonly needed when working with the FCC-EDM.
 
 ### Traversing particle histories
+
+Since particle relations are only saved through the association with vertices, the history needs to be reconstructed at run time. We provide a tool `GraphBuilder` that allows to build the graph from a `MCParticleCollection`. Have a look at the `read.cc` example how it can be used.

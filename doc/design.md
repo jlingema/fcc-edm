@@ -22,10 +22,10 @@ Simulated and reconstructed event description
 --
 
 The physics output of simulation are hits, describing the position and deposited energy of a particle traversal through a sensitive detector component. We have dedicated classes for Tracker and Calorimeter hits:
-- [fcc::SimCaloHit](https://github.com/HEP-FCC/fcc-edm/blob/master/datamodel/datamodel/SimCaloHit.h)
-- [fcc::SimTrackHit](https://github.com/HEP-FCC/fcc-edm/blob/master/datamodel/datamodel/SimTrackHit.h)
+- [fcc::CaloHit](https://github.com/HEP-FCC/fcc-edm/blob/master/datamodel/datamodel/CaloHit.h)
+- [fcc::TrackHit](https://github.com/HEP-FCC/fcc-edm/blob/master/datamodel/datamodel/TrackHit.h)
 
-Again, a composition of `BareHit` is chosen to allow algorithms to work on both simulated and real detector hits without the need of templates.
+One implementation is used for both simulated and real detector hits. Additional information may be saved in `Sim*Hit` class with a `OneToOneRelation` to the `*Hit` and additional information as members.
 
 Reconstruction is then performed with these hits as input. Following clusterisation, track fits are performed on track clusters, vertices are found based on the tracks and particles are identified based on calorimeter clusters and track parameters. Finally close-by particles are added to particle jets.
 
